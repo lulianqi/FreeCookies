@@ -1,0 +1,31 @@
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\FreeCookies.dll
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\FreeCookies.pdb
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\Fiddler.exe
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\Xceed.Zip.v5.4.dll
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\Xceed.FileSystem.v5.4.dll
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\Analytics.dll
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\Newtonsoft.Json.dll
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\Xceed.Compression.Formats.v5.4.dll
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\Xceed.Compression.v5.4.dll
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\GA.Analytics.Monitor.dll
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\Fiddler.pdb
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\Analytics.pdb
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\bin\Debug\GA.Analytics.Monitor.pdb
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.CookiesControl.resources
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.EditCookieControl.resources
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.Properties.Resources.resources
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.Resources.MyResource.resources
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.csproj.GenerateResource.Cache
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.dll
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.pdb
+D:\my\code\FiddlerExtension\FreeCookies\bin\Debug\FreeCookies.dll
+D:\my\code\FiddlerExtension\FreeCookies\bin\Debug\FreeCookies.pdb
+D:\my\code\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.CookiesControl.resources
+D:\my\code\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.EditCookieControl.resources
+D:\my\code\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.Properties.Resources.resources
+D:\my\code\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.Resources.MyResource.resources
+D:\my\code\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.csproj.GenerateResource.Cache
+D:\my\code\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.dll
+D:\my\code\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.pdb
+D:\my\code\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.csprojResolveAssemblyReference.cache
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.EditCookieForm.resources
