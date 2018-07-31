@@ -78,7 +78,8 @@ namespace FreeCookies
 
         public void AutoTamperResponseAfter(Session oSession)
         {
-            //oSession.u
+            oSession.utilFindInResponse("", false);
+            //oSession.oResponse.headers.Add();
             if (!isOnLoad)
             {
                 return;

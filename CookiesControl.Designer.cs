@@ -41,21 +41,23 @@
             this.tb_urlFilter = new System.Windows.Forms.TextBox();
             this.ck_isInjeckCookies = new System.Windows.Forms.CheckBox();
             this.cb_injectAlways = new System.Windows.Forms.CheckBox();
-            this.pb_editCookietSet = new System.Windows.Forms.PictureBox();
             this.groupBox_editResponse = new System.Windows.Forms.GroupBox();
-            this.splitContainer_info = new System.Windows.Forms.SplitContainer();
-            this.pb_editRequestDelHaeds = new System.Windows.Forms.PictureBox();
-            this.lv_editRequestHeads = new System.Windows.Forms.ListView();
+            this.pb_addHead = new System.Windows.Forms.PictureBox();
+            this.pb_removeHead = new System.Windows.Forms.PictureBox();
+            this.lv_editResponseHeads = new System.Windows.Forms.ListView();
             this.columnHeader_heads = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.splitContainer_info = new System.Windows.Forms.SplitContainer();
+            this.pb_editCookietSet = new System.Windows.Forms.PictureBox();
             this.editCookieControl = new FreeCookies.EditCookieControl();
             this.groupBox_urlFilter.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_editCookietSet)).BeginInit();
             this.groupBox_editResponse.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_addHead)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_removeHead)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_info)).BeginInit();
             this.splitContainer_info.Panel1.SuspendLayout();
             this.splitContainer_info.Panel2.SuspendLayout();
             this.splitContainer_info.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_editRequestDelHaeds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_editCookietSet)).BeginInit();
             this.SuspendLayout();
             // 
             // rtb_cookies
@@ -173,25 +175,11 @@
             this.cb_injectAlways.UseVisualStyleBackColor = true;
             this.cb_injectAlways.CheckedChanged += new System.EventHandler(this.cb_injectAlways_CheckedChanged);
             // 
-            // pb_editCookietSet
-            // 
-            this.pb_editCookietSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pb_editCookietSet.BackColor = System.Drawing.Color.Transparent;
-            this.pb_editCookietSet.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pb_editCookietSet.Image = ((System.Drawing.Image)(resources.GetObject("pb_editCookietSet.Image")));
-            this.pb_editCookietSet.Location = new System.Drawing.Point(335, 48);
-            this.pb_editCookietSet.Name = "pb_editCookietSet";
-            this.pb_editCookietSet.Size = new System.Drawing.Size(23, 22);
-            this.pb_editCookietSet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pb_editCookietSet.TabIndex = 37;
-            this.pb_editCookietSet.TabStop = false;
-            this.pb_editCookietSet.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
-            this.pb_editCookietSet.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
-            // 
             // groupBox_editResponse
             // 
-            this.groupBox_editResponse.Controls.Add(this.pb_editRequestDelHaeds);
-            this.groupBox_editResponse.Controls.Add(this.lv_editRequestHeads);
+            this.groupBox_editResponse.Controls.Add(this.pb_addHead);
+            this.groupBox_editResponse.Controls.Add(this.pb_removeHead);
+            this.groupBox_editResponse.Controls.Add(this.lv_editResponseHeads);
             this.groupBox_editResponse.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox_editResponse.Location = new System.Drawing.Point(0, 76);
             this.groupBox_editResponse.Name = "groupBox_editResponse";
@@ -199,6 +187,59 @@
             this.groupBox_editResponse.TabIndex = 38;
             this.groupBox_editResponse.TabStop = false;
             this.groupBox_editResponse.Text = "Change Response";
+            // 
+            // pb_addHead
+            // 
+            this.pb_addHead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pb_addHead.BackColor = System.Drawing.Color.Transparent;
+            this.pb_addHead.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pb_addHead.Image = ((System.Drawing.Image)(resources.GetObject("pb_addHead.Image")));
+            this.pb_addHead.Location = new System.Drawing.Point(319, 17);
+            this.pb_addHead.Name = "pb_addHead";
+            this.pb_addHead.Size = new System.Drawing.Size(20, 20);
+            this.pb_addHead.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pb_addHead.TabIndex = 42;
+            this.pb_addHead.TabStop = false;
+            this.pb_addHead.Click += new System.EventHandler(this.pb_addHead_Click);
+            this.pb_addHead.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
+            this.pb_addHead.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
+            // 
+            // pb_removeHead
+            // 
+            this.pb_removeHead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pb_removeHead.BackColor = System.Drawing.Color.Transparent;
+            this.pb_removeHead.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pb_removeHead.Image = ((System.Drawing.Image)(resources.GetObject("pb_removeHead.Image")));
+            this.pb_removeHead.Location = new System.Drawing.Point(340, 17);
+            this.pb_removeHead.Name = "pb_removeHead";
+            this.pb_removeHead.Size = new System.Drawing.Size(20, 20);
+            this.pb_removeHead.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pb_removeHead.TabIndex = 41;
+            this.pb_removeHead.TabStop = false;
+            this.pb_removeHead.Click += new System.EventHandler(this.pb_removeHead_Click);
+            this.pb_removeHead.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
+            this.pb_removeHead.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
+            // 
+            // lv_editResponseHeads
+            // 
+            this.lv_editResponseHeads.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.lv_editResponseHeads.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lv_editResponseHeads.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader_heads});
+            this.lv_editResponseHeads.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lv_editResponseHeads.LabelEdit = true;
+            this.lv_editResponseHeads.Location = new System.Drawing.Point(218, 17);
+            this.lv_editResponseHeads.Name = "lv_editResponseHeads";
+            this.lv_editResponseHeads.Size = new System.Drawing.Size(144, 139);
+            this.lv_editResponseHeads.TabIndex = 39;
+            this.lv_editResponseHeads.UseCompatibleStateImageBehavior = false;
+            this.lv_editResponseHeads.View = System.Windows.Forms.View.Details;
+            this.lv_editResponseHeads.DoubleClick += new System.EventHandler(this.lv_editResponseHeads_DoubleClick);
+            // 
+            // columnHeader_heads
+            // 
+            this.columnHeader_heads.Text = "Heads";
+            this.columnHeader_heads.Width = 241;
             // 
             // splitContainer_info
             // 
@@ -220,38 +261,22 @@
             this.splitContainer_info.Size = new System.Drawing.Size(687, 235);
             this.splitContainer_info.SplitterDistance = 365;
             this.splitContainer_info.TabIndex = 39;
+            this.splitContainer_info.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer_info_SplitterMoved);
             // 
-            // pb_editRequestDelHaeds
+            // pb_editCookietSet
             // 
-            this.pb_editRequestDelHaeds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pb_editRequestDelHaeds.BackColor = System.Drawing.Color.Transparent;
-            this.pb_editRequestDelHaeds.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pb_editRequestDelHaeds.Image = ((System.Drawing.Image)(resources.GetObject("pb_editRequestDelHaeds.Image")));
-            this.pb_editRequestDelHaeds.Location = new System.Drawing.Point(338, 17);
-            this.pb_editRequestDelHaeds.Name = "pb_editRequestDelHaeds";
-            this.pb_editRequestDelHaeds.Size = new System.Drawing.Size(24, 24);
-            this.pb_editRequestDelHaeds.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pb_editRequestDelHaeds.TabIndex = 40;
-            this.pb_editRequestDelHaeds.TabStop = false;
-            // 
-            // lv_editRequestHeads
-            // 
-            this.lv_editRequestHeads.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.lv_editRequestHeads.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lv_editRequestHeads.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader_heads});
-            this.lv_editRequestHeads.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lv_editRequestHeads.Location = new System.Drawing.Point(218, 17);
-            this.lv_editRequestHeads.Name = "lv_editRequestHeads";
-            this.lv_editRequestHeads.Size = new System.Drawing.Size(144, 139);
-            this.lv_editRequestHeads.TabIndex = 39;
-            this.lv_editRequestHeads.UseCompatibleStateImageBehavior = false;
-            this.lv_editRequestHeads.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader_heads
-            // 
-            this.columnHeader_heads.Text = "Heads";
-            this.columnHeader_heads.Width = 241;
+            this.pb_editCookietSet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pb_editCookietSet.BackColor = System.Drawing.Color.Transparent;
+            this.pb_editCookietSet.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pb_editCookietSet.Image = ((System.Drawing.Image)(resources.GetObject("pb_editCookietSet.Image")));
+            this.pb_editCookietSet.Location = new System.Drawing.Point(335, 48);
+            this.pb_editCookietSet.Name = "pb_editCookietSet";
+            this.pb_editCookietSet.Size = new System.Drawing.Size(23, 22);
+            this.pb_editCookietSet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pb_editCookietSet.TabIndex = 37;
+            this.pb_editCookietSet.TabStop = false;
+            this.pb_editCookietSet.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
+            this.pb_editCookietSet.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
             // 
             // editCookieControl
             // 
@@ -275,14 +300,15 @@
             this.Resize += new System.EventHandler(this.CookiesControl_Resize);
             this.groupBox_urlFilter.ResumeLayout(false);
             this.groupBox_urlFilter.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_editCookietSet)).EndInit();
             this.groupBox_editResponse.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_addHead)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_removeHead)).EndInit();
             this.splitContainer_info.Panel1.ResumeLayout(false);
             this.splitContainer_info.Panel1.PerformLayout();
             this.splitContainer_info.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_info)).EndInit();
             this.splitContainer_info.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_editRequestDelHaeds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_editCookietSet)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -305,8 +331,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.GroupBox groupBox_editResponse;
         private System.Windows.Forms.SplitContainer splitContainer_info;
-        private System.Windows.Forms.PictureBox pb_editRequestDelHaeds;
-        private System.Windows.Forms.ListView lv_editRequestHeads;
+        private System.Windows.Forms.ListView lv_editResponseHeads;
         private System.Windows.Forms.ColumnHeader columnHeader_heads;
+        private System.Windows.Forms.PictureBox pb_addHead;
+        private System.Windows.Forms.PictureBox pb_removeHead;
     }
 }

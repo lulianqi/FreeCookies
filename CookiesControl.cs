@@ -234,6 +234,33 @@ namespace FreeCookies
             //f.ShowDialog(this);
         }
 
+        private void pb_addHead_Click(object sender, EventArgs e)
+        {
+            //lv_editRequestHeads.Items.Add("name: value");
+            AddResponseHead f = new AddResponseHead(lv_editResponseHeads,true);
+            f.ShowDialog();
+        }
+
+        private void pb_removeHead_Click(object sender, EventArgs e)
+        {
+            if (lv_editResponseHeads.SelectedItems.Count > 0)
+            {
+                lv_editResponseHeads.Items.Remove(lv_editResponseHeads.SelectedItems[0]);
+            }
+            else
+            {
+                lv_editResponseHeads.Items.Clear();
+            }
+        }
+
+        private void lv_editResponseHeads_DoubleClick(object sender, EventArgs e)
+        {
+            if (lv_editResponseHeads.SelectedItems.Count > 0)
+            {
+                AddResponseHead f = new AddResponseHead(lv_editResponseHeads, false);
+                f.ShowDialog();
+            }
+        }
 
         //pictureBox change for all
         private void pictureBox_MouseMove(object sender, MouseEventArgs e)
@@ -257,7 +284,10 @@ namespace FreeCookies
             groupBox_editResponse.Height = splitContainer_info.Height - 80;
         }
 
-
+        private void splitContainer_info_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            tb_urlFilter.Width = groupBox_urlFilter.Width - 60;
+        }
         #endregion
 
         #region Function
@@ -373,6 +403,11 @@ namespace FreeCookies
         }
 
         #endregion
+
+
+
+        
+
     }
 
 
