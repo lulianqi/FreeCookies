@@ -12,12 +12,14 @@ namespace FreeCookies
 {
     public partial class AddResponseHead : Form
     {
+        CookiesControl cookiesControl;
         ListView editListView;
         bool isAdd;
-        public AddResponseHead(ListView yourEditListView,bool yourIsAdd)
+        public AddResponseHead(ListView yourEditListView, CookiesControl yourCookiesControl , bool yourIsAdd)
         {
             InitializeComponent();
             editListView = yourEditListView;
+            cookiesControl = yourCookiesControl;
             isAdd = yourIsAdd;
         }
 
@@ -34,7 +36,7 @@ namespace FreeCookies
         {
             if(tb_key.Text==""||rtb_value.Text=="")
             {
-                MessageBox.Show("Stop", "input key and value", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("input key and value","Stop" , MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
             else
             {
@@ -46,6 +48,7 @@ namespace FreeCookies
                 {
                     editListView.SelectedItems[0].Text = String.Format("{0}: {1}", tb_key.Text, rtb_value.Text);
                 }
+                cookiesControl.ReflushAddResponseHeads();
                 this.Close();
             }
         }

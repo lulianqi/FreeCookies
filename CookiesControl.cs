@@ -19,6 +19,7 @@ namespace FreeCookies
         }
 
         CookiesInjectInfo cookiesInjectInfo = null;
+        ResponseChangeInfo responseChangeInfo = null;
         List<KeyValuePair<string, string>> myCookiesList = null;
         Timer myTimer = new Timer();
         int flushCookieTextTick = -1;
@@ -34,10 +35,20 @@ namespace FreeCookies
         private void CookiesControl_Load(object sender, EventArgs e)
         {
             cookiesInjectInfo = new CookiesInjectInfo();
-            cookiesInjectInfo.ContainUrl = tb_urlFilter.Text;
-            cookiesInjectInfo.IsInject = ck_isInjeckCookies.Checked;
+            responseChangeInfo = new ResponseChangeInfo();
             myCookiesList=new List<KeyValuePair<string,string>>();
             editedItemList = new List<KeyValuePair<ListViewItem, int>>();
+
+            cookiesInjectInfo.IsInject = ck_isInjeckCookies.Checked;
+            cookiesInjectInfo.ContainUrl = cookiesInjectInfo.IsExactMatch ? tb_urlFilter.Text.Remove(0, 1) : tb_urlFilter.Text;
+            cookiesInjectInfo.IsExactMatch = tb_urlFilter.Text.StartsWith("*");
+            responseChangeInfo.IsChange = ck_isChangeResponse.Checked;
+            responseChangeInfo.IsRegex = ck_isRegex.Checked;
+            responseChangeInfo.IsOnlyAddHeads = cb_onlyHead.Checked;
+            responseChangeInfo.ReplaceStr = tb_responseReplace.Text;
+            responseChangeInfo.ResponseStr = rtb_reponse.Text;
+            responseChangeInfo.ResponseAddHead = null;
+
             editCookieControl.SetListView(lv_cookie);
             editCookieControl.OnListViewChange += editCookieControl_OnListViewChange;
 
@@ -50,7 +61,11 @@ namespace FreeCookies
 
         }
 
-        
+        public ResponseChangeInfo ChangeInfo
+        {
+            get { return responseChangeInfo; }
+        }
+
         public CookiesInjectInfo InjectInfo
         {
             get { return cookiesInjectInfo; }
@@ -120,6 +135,11 @@ namespace FreeCookies
                 ck_isInjeckCookies.Checked = false;
                 PutWarn("Set InjeckCookies unable");
             }
+        }
+
+        public void FiddlerFreeCookiesSetResponsed(string yourUri)
+        {
+            PutWarn(string.Format("Change response with 【{0}】", yourUri));
         }
 
         #region Inner Event
@@ -205,7 +225,8 @@ namespace FreeCookies
 
         private void tb_urlFilter_TextChanged(object sender, EventArgs e)
         {
-            cookiesInjectInfo.ContainUrl = tb_urlFilter.Text;
+            cookiesInjectInfo.IsExactMatch = tb_urlFilter.Text.StartsWith("*");
+            cookiesInjectInfo.ContainUrl = cookiesInjectInfo.IsExactMatch ? tb_urlFilter.Text.Remove(0, 1) : tb_urlFilter.Text;
         }
 
         private void ck_isInjeckCookies_CheckedChanged(object sender, EventArgs e)
@@ -237,7 +258,7 @@ namespace FreeCookies
         private void pb_addHead_Click(object sender, EventArgs e)
         {
             //lv_editRequestHeads.Items.Add("name: value");
-            AddResponseHead f = new AddResponseHead(lv_editResponseHeads,true);
+            AddResponseHead f = new AddResponseHead(lv_editResponseHeads,this,true);
             f.ShowDialog();
         }
 
@@ -251,13 +272,14 @@ namespace FreeCookies
             {
                 lv_editResponseHeads.Items.Clear();
             }
+            ReflushAddResponseHeads();
         }
 
         private void lv_editResponseHeads_DoubleClick(object sender, EventArgs e)
         {
             if (lv_editResponseHeads.SelectedItems.Count > 0)
             {
-                AddResponseHead f = new AddResponseHead(lv_editResponseHeads, false);
+                AddResponseHead f = new AddResponseHead(lv_editResponseHeads,this, false);
                 f.ShowDialog();
             }
         }
@@ -274,6 +296,44 @@ namespace FreeCookies
             ((PictureBox)sender).BackColor = Color.Transparent;
         }
 
+        #region Edit Response
+        private void ck_isChangeResponse_CheckedChanged(object sender, EventArgs e)
+        {
+            responseChangeInfo.IsChange = ck_isChangeResponse.Checked;
+            tb_responseReplace.Enabled = rtb_reponse.Enabled = ck_isRegex.Enabled = !ck_isChangeResponse.Checked;
+            if(!ck_isChangeResponse.Checked && cb_onlyHead.Checked)
+            {
+                cb_onlyHead.Checked = false;
+            }
+        }
+
+        private void cb_onlyHead_CheckedChanged(object sender, EventArgs e)
+        {
+            responseChangeInfo.IsOnlyAddHeads = cb_onlyHead.Checked;
+            if(cb_onlyHead.Checked && !ck_isChangeResponse.Checked)
+            {
+                ck_isChangeResponse.Checked = true;
+            }
+        }
+
+        
+        private void ck_isRegex_CheckedChanged(object sender, EventArgs e)
+        {
+            responseChangeInfo.IsRegex = ck_isRegex.Checked;
+        }
+
+        private void tb_responseReplace_TextChanged(object sender, EventArgs e)
+        {
+            responseChangeInfo.ReplaceStr = tb_responseReplace.Text;
+        }
+
+        private void rtb_reponse_TextChanged(object sender, EventArgs e)
+        {
+            responseChangeInfo.ResponseStr = rtb_reponse.Text;
+        }
+        #endregion
+
+        #region UI Resize
         private void CookiesControl_Resize(object sender, EventArgs e)
         {
             //rtb_info.Width = this.Width - 364;
@@ -284,13 +344,22 @@ namespace FreeCookies
             groupBox_editResponse.Height = splitContainer_info.Height - 80;
         }
 
+        private void groupBox_editResponse_Resize(object sender, EventArgs e)
+        {
+            rtb_reponse.Height = groupBox_editResponse.Height - 72;
+            tb_responseReplace.Width = groupBox_editResponse.Width - 265;
+        }
+
         private void splitContainer_info_SplitterMoved(object sender, SplitterEventArgs e)
         {
             tb_urlFilter.Width = groupBox_urlFilter.Width - 60;
         }
+
+        #endregion
+       
         #endregion
 
-        #region Function
+        #region Inner Function
         private List<KeyValuePair<string, string>> GetCookieList(string yourCookieString)
         {
             List<KeyValuePair<string, string>> tempCL=null;
@@ -402,11 +471,27 @@ namespace FreeCookies
             rtb_info.SelectionColor = Color.Black;
         }
 
+        public void ReflushAddResponseHeads()
+        {
+            responseChangeInfo.ResponseAddHead = null;
+            if(lv_editResponseHeads.Items.Count>0)
+            {
+                responseChangeInfo.ResponseAddHead = new List<KeyValuePair<string, string>>();
+                foreach(ListViewItem item in lv_editResponseHeads.Items)
+                {
+                    string headStr = item.Text;
+                    string key = headStr.Remove(headStr.IndexOf(": "));
+                    string value = headStr.Substring(headStr.IndexOf(": ") + 2);
+                    responseChangeInfo.ResponseAddHead.Add(new KeyValuePair<string, string>(key, value));
+                }
+            }
+        }
+
         #endregion
 
 
 
-        
+
 
     }
 
@@ -415,8 +500,21 @@ namespace FreeCookies
     public class CookiesInjectInfo
     {
         public bool IsInject { get; set; }
+
+        public bool IsExactMatch { get; set; }
         public string ContainUrl { get; set; }
 
+    }
+
+    public class ResponseChangeInfo
+    {
+        public bool IsChange { get; set; }
+        public bool IsRegex { get; set; }
+        public bool IsOnlyAddHeads { get; set; }
+        public string ReplaceStr { get; set; }
+        public string ResponseStr { get; set; }
+
+        public List<KeyValuePair<string, string>> ResponseAddHead { get; set; }
     }
 
     public class ChangeCookieItemEventArgs : EventArgs

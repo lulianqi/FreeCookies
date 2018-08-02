@@ -79,6 +79,7 @@ namespace FreeCookies
         public void AutoTamperResponseAfter(Session oSession)
         {
             oSession.utilFindInResponse("", false);
+            //oSession.utilReplaceRegexInResponse
             //oSession.oResponse.headers.Add();
             if (!isOnLoad)
             {
@@ -86,7 +87,7 @@ namespace FreeCookies
             }
             if (myCookiesCtrl.InjectInfo.IsInject)
             {
-                if (oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl))
+                if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
                 {
                     //oSession.oResponse.headers.Add("Set-Cookie", myCookiesCtrl.InjectCookies);
                     foreach (var tempCookie in myCookiesCtrl.CookiesList)
@@ -95,6 +96,42 @@ namespace FreeCookies
                     }
                     myCookiesCtrl.FiddlerFreeCookiesSetCookieded(oSession.url, oSession.ResponseHeaders.ToString());
                     oSession["ui-backcolor"] = "Yellow";
+                }
+            }
+
+            if(myCookiesCtrl.ChangeInfo.IsChange)
+            {
+                if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
+                {
+                    if (myCookiesCtrl.ChangeInfo.ResponseAddHead != null)
+                    {
+                        foreach (var kv in myCookiesCtrl.ChangeInfo.ResponseAddHead)
+                        {
+                            oSession.oResponse.headers.Add(kv.Key, kv.Value);
+                        }
+                    }
+
+                    if (!myCookiesCtrl.ChangeInfo.IsOnlyAddHeads)
+                    {
+                        if (myCookiesCtrl.ChangeInfo.ReplaceStr == "")
+                        {
+                            oSession.ResponseBody = (oSession.GetResponseBodyEncoding()).GetBytes(myCookiesCtrl.ChangeInfo.ResponseStr);
+                        }
+                        else
+                        {
+                            oSession.utilDecodeResponse();
+                            if (myCookiesCtrl.ChangeInfo.IsRegex)
+                            {
+                                oSession.utilReplaceRegexInResponse(myCookiesCtrl.ChangeInfo.ReplaceStr, myCookiesCtrl.ChangeInfo.ResponseStr);
+                            }
+                            else
+                            {
+                                oSession.utilReplaceInResponse(myCookiesCtrl.ChangeInfo.ReplaceStr, myCookiesCtrl.ChangeInfo.ResponseStr);
+                            }
+                        }
+                    }
+                    myCookiesCtrl.FiddlerFreeCookiesSetResponsed(oSession.url); 
+                    oSession["ui-backcolor"] = "Firebrick";
                 }
             }
         }

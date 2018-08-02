@@ -42,12 +42,18 @@
             this.ck_isInjeckCookies = new System.Windows.Forms.CheckBox();
             this.cb_injectAlways = new System.Windows.Forms.CheckBox();
             this.groupBox_editResponse = new System.Windows.Forms.GroupBox();
+            this.ck_isChangeResponse = new System.Windows.Forms.CheckBox();
+            this.ck_isRegex = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tb_responseReplace = new System.Windows.Forms.TextBox();
+            this.rtb_reponse = new System.Windows.Forms.RichTextBox();
             this.pb_addHead = new System.Windows.Forms.PictureBox();
             this.pb_removeHead = new System.Windows.Forms.PictureBox();
             this.lv_editResponseHeads = new System.Windows.Forms.ListView();
             this.columnHeader_heads = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer_info = new System.Windows.Forms.SplitContainer();
             this.pb_editCookietSet = new System.Windows.Forms.PictureBox();
+            this.cb_onlyHead = new System.Windows.Forms.CheckBox();
             this.editCookieControl = new FreeCookies.EditCookieControl();
             this.groupBox_urlFilter.SuspendLayout();
             this.groupBox_editResponse.SuspendLayout();
@@ -90,7 +96,6 @@
             this.lv_cookie.Dock = System.Windows.Forms.DockStyle.Top;
             this.lv_cookie.FullRowSelect = true;
             this.lv_cookie.Location = new System.Drawing.Point(0, 88);
-            this.lv_cookie.MultiSelect = false;
             this.lv_cookie.Name = "lv_cookie";
             this.lv_cookie.Size = new System.Drawing.Size(687, 139);
             this.lv_cookie.TabIndex = 2;
@@ -167,7 +172,7 @@
             // cb_injectAlways
             // 
             this.cb_injectAlways.AutoSize = true;
-            this.cb_injectAlways.Location = new System.Drawing.Point(119, 54);
+            this.cb_injectAlways.Location = new System.Drawing.Point(113, 54);
             this.cb_injectAlways.Name = "cb_injectAlways";
             this.cb_injectAlways.Size = new System.Drawing.Size(102, 16);
             this.cb_injectAlways.TabIndex = 7;
@@ -177,9 +182,15 @@
             // 
             // groupBox_editResponse
             // 
+            this.groupBox_editResponse.Controls.Add(this.ck_isChangeResponse);
+            this.groupBox_editResponse.Controls.Add(this.ck_isRegex);
+            this.groupBox_editResponse.Controls.Add(this.label1);
+            this.groupBox_editResponse.Controls.Add(this.tb_responseReplace);
+            this.groupBox_editResponse.Controls.Add(this.rtb_reponse);
             this.groupBox_editResponse.Controls.Add(this.pb_addHead);
             this.groupBox_editResponse.Controls.Add(this.pb_removeHead);
             this.groupBox_editResponse.Controls.Add(this.lv_editResponseHeads);
+            this.groupBox_editResponse.Controls.Add(this.cb_onlyHead);
             this.groupBox_editResponse.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox_editResponse.Location = new System.Drawing.Point(0, 76);
             this.groupBox_editResponse.Name = "groupBox_editResponse";
@@ -187,6 +198,57 @@
             this.groupBox_editResponse.TabIndex = 38;
             this.groupBox_editResponse.TabStop = false;
             this.groupBox_editResponse.Text = "Change Response";
+            this.groupBox_editResponse.Resize += new System.EventHandler(this.groupBox_editResponse_Resize);
+            // 
+            // ck_isChangeResponse
+            // 
+            this.ck_isChangeResponse.AutoSize = true;
+            this.ck_isChangeResponse.Location = new System.Drawing.Point(5, 19);
+            this.ck_isChangeResponse.Name = "ck_isChangeResponse";
+            this.ck_isChangeResponse.Size = new System.Drawing.Size(102, 16);
+            this.ck_isChangeResponse.TabIndex = 47;
+            this.ck_isChangeResponse.Text = "Enable Change";
+            this.ck_isChangeResponse.UseVisualStyleBackColor = true;
+            this.ck_isChangeResponse.CheckedChanged += new System.EventHandler(this.ck_isChangeResponse_CheckedChanged);
+            // 
+            // ck_isRegex
+            // 
+            this.ck_isRegex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ck_isRegex.AutoSize = true;
+            this.ck_isRegex.Location = new System.Drawing.Point(160, 44);
+            this.ck_isRegex.Name = "ck_isRegex";
+            this.ck_isRegex.Size = new System.Drawing.Size(54, 16);
+            this.ck_isRegex.TabIndex = 46;
+            this.ck_isRegex.Text = "Regex";
+            this.ck_isRegex.UseVisualStyleBackColor = true;
+            this.ck_isRegex.CheckedChanged += new System.EventHandler(this.ck_isRegex_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 12);
+            this.label1.TabIndex = 45;
+            this.label1.Text = "Replace";
+            // 
+            // tb_responseReplace
+            // 
+            this.tb_responseReplace.Location = new System.Drawing.Point(55, 43);
+            this.tb_responseReplace.Name = "tb_responseReplace";
+            this.tb_responseReplace.Size = new System.Drawing.Size(100, 21);
+            this.tb_responseReplace.TabIndex = 44;
+            this.tb_responseReplace.TextChanged += new System.EventHandler(this.tb_responseReplace_TextChanged);
+            // 
+            // rtb_reponse
+            // 
+            this.rtb_reponse.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.rtb_reponse.Location = new System.Drawing.Point(3, 67);
+            this.rtb_reponse.Name = "rtb_reponse";
+            this.rtb_reponse.Size = new System.Drawing.Size(215, 89);
+            this.rtb_reponse.TabIndex = 43;
+            this.rtb_reponse.Text = "";
+            this.rtb_reponse.TextChanged += new System.EventHandler(this.rtb_reponse_TextChanged);
             // 
             // pb_addHead
             // 
@@ -278,6 +340,17 @@
             this.pb_editCookietSet.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
             this.pb_editCookietSet.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
             // 
+            // cb_onlyHead
+            // 
+            this.cb_onlyHead.AutoSize = true;
+            this.cb_onlyHead.Location = new System.Drawing.Point(112, 19);
+            this.cb_onlyHead.Name = "cb_onlyHead";
+            this.cb_onlyHead.Size = new System.Drawing.Size(102, 16);
+            this.cb_onlyHead.TabIndex = 48;
+            this.cb_onlyHead.Text = "Only Add Head";
+            this.cb_onlyHead.UseVisualStyleBackColor = true;
+            this.cb_onlyHead.CheckedChanged += new System.EventHandler(this.cb_onlyHead_CheckedChanged);
+            // 
             // editCookieControl
             // 
             this.editCookieControl.Location = new System.Drawing.Point(87, 229);
@@ -301,6 +374,7 @@
             this.groupBox_urlFilter.ResumeLayout(false);
             this.groupBox_urlFilter.PerformLayout();
             this.groupBox_editResponse.ResumeLayout(false);
+            this.groupBox_editResponse.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_addHead)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_removeHead)).EndInit();
             this.splitContainer_info.Panel1.ResumeLayout(false);
@@ -335,5 +409,11 @@
         private System.Windows.Forms.ColumnHeader columnHeader_heads;
         private System.Windows.Forms.PictureBox pb_addHead;
         private System.Windows.Forms.PictureBox pb_removeHead;
+        private System.Windows.Forms.RichTextBox rtb_reponse;
+        private System.Windows.Forms.CheckBox ck_isRegex;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tb_responseReplace;
+        private System.Windows.Forms.CheckBox ck_isChangeResponse;
+        private System.Windows.Forms.CheckBox cb_onlyHead;
     }
 }

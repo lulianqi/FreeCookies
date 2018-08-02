@@ -108,7 +108,22 @@ namespace FreeCookies
         {
             if(editItem!=null)
             {
-                cookieLv.Items.Remove(editItem);
+                if (cookieLv.SelectedItems.Count == 0)
+                {
+                    cookieLv.Items.Remove(editItem);
+                }
+                else if (cookieLv.SelectedItems.Count>0)
+                {
+                    List<ListViewItem> itemToRemove = new List<ListViewItem>();
+                    foreach (ListViewItem rmItem in cookieLv.SelectedItems)
+                    {
+                        itemToRemove.Add(rmItem);
+                    }
+                    foreach (ListViewItem rmItem in itemToRemove)
+                    {
+                        cookieLv.Items.Remove(rmItem);
+                    }
+                }
                 ListViewChange();
             }
         }
