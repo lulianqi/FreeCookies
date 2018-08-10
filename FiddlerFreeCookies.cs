@@ -78,7 +78,12 @@ namespace FreeCookies
 
         public void AutoTamperResponseAfter(Session oSession)
         {
-            oSession.utilFindInResponse("", false);
+            //if (oSession.uriContains("cnzz.com"))
+            //{
+            //    System.Threading.Thread.Sleep(10000000);
+            //}
+
+            //oSession.utilFindInResponse("", false);
             //oSession.utilReplaceRegexInResponse
             //oSession.oResponse.headers.Add();
             if (!isOnLoad)
@@ -87,6 +92,10 @@ namespace FreeCookies
             }
             if (myCookiesCtrl.InjectInfo.IsInject)
             {
+                if (oSession.RequestMethod == "CONNECT")
+                {
+                    return;
+                }
                 if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
                 {
                     //oSession.oResponse.headers.Add("Set-Cookie", myCookiesCtrl.InjectCookies);
@@ -101,6 +110,10 @@ namespace FreeCookies
 
             if(myCookiesCtrl.ChangeInfo.IsChange)
             {
+                if (oSession.RequestMethod == "CONNECT")
+                {
+                    return;
+                }
                 if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
                 {
                     if (myCookiesCtrl.ChangeInfo.ResponseAddHead != null)

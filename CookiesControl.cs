@@ -18,14 +18,15 @@ namespace FreeCookies
             InitializeComponent();
         }
 
-        CookiesInjectInfo cookiesInjectInfo = null;
-        ResponseChangeInfo responseChangeInfo = null;
-        List<KeyValuePair<string, string>> myCookiesList = null;
+        CookiesInjectInfo cookiesInjectInfo = null;                        //cookies修改信息
+        ResponseChangeInfo responseChangeInfo = null;                      //response修改信息
+        List<KeyValuePair<string, string>> myCookiesList = null;           //cookie列表数据源
+        string addAtr = "Path=/";                                          //cookie默认属性
         Timer myTimer = new Timer();
-        int flushCookieTextTick = -1;
+        int flushCookieTextTick = -1;                                      //cookies格式验证延时
         const int flushFormatTime = 3;
         const int flushColorTime = 20;
-        List<KeyValuePair<ListViewItem,int>> editedItemList=null;
+        List<KeyValuePair<ListViewItem,int>> editedItemList=null;          //处于标记状态的cookie列表
         Graphics graphicsForRtbCookies=null;
         Pen warnPen = null;
 
@@ -61,11 +62,17 @@ namespace FreeCookies
 
         }
 
+        /// <summary>
+        /// 获取Response修改信息
+        /// </summary>
         public ResponseChangeInfo ChangeInfo
         {
             get { return responseChangeInfo; }
         }
-
+        
+        /// <summary>
+        /// 获取Cookie修改信息
+        /// </summary>
         public CookiesInjectInfo InjectInfo
         {
             get { return cookiesInjectInfo; }
@@ -86,6 +93,10 @@ namespace FreeCookies
             return rtb_cookies.Text;
         }
 
+        /// <summary>
+        /// Fiddler 获取 cookie
+        /// </summary>
+        /// <param name="yourCookies">cookie 值</param>
         public void SetControlCookies(string yourCookies)
         {
             if (yourCookies=="")
@@ -96,6 +107,11 @@ namespace FreeCookies
             ReFlushCookiesView(true);
         }
 
+        /// <summary>
+        /// 向free cookies 显示页面打印消息
+        /// </summary>
+        /// <param name="sender">消息发送者</param>
+        /// <param name="yourMessage">消息内容</param>
         public void AddMessageInfo(string sender , string yourMessage)
         {
             switch (sender)
@@ -126,6 +142,11 @@ namespace FreeCookies
            
         }
 
+        /// <summary>
+        /// 完成一次cookies设置
+        /// </summary>
+        /// <param name="yourUri">被修改的请求的uri</param>
+        /// <param name="yourHeads">修改后的heads头</param>
         public void FiddlerFreeCookiesSetCookieded(string yourUri,string yourHeads)
         {
             PutWarn(string.Format( "Set Cookie with 【{0}】",yourUri));
@@ -360,7 +381,7 @@ namespace FreeCookies
         #endregion
 
         #region Inner Function
-        private List<KeyValuePair<string, string>> GetCookieList(string yourCookieString)
+        private List<KeyValuePair<string, string>> GetCookieList(string yourCookieString, string cookieAttribute)
         {
             List<KeyValuePair<string, string>> tempCL=null;
             if(yourCookieString!=null)
@@ -381,19 +402,24 @@ namespace FreeCookies
                         cookieKey = eachCookies.Remove(splitIndex);
                         cookieKey = cookieKey.Trim();
                         cookieVaule = eachCookies.Substring(splitIndex + 1);
-                        tempCL.Add(new KeyValuePair<string, string>(cookieKey, cookieVaule));
+                        tempCL.Add(new KeyValuePair<string, string>(cookieKey, string.IsNullOrEmpty(cookieAttribute) ? cookieVaule: string.Format("{0}; {1}",cookieVaule,cookieAttribute)));
                     }
                 }
             }
             return tempCL;
         }
+
+        private List<KeyValuePair<string, string>> GetCookieList(string yourCookieString)
+        {
+            return GetCookieList(yourCookieString, null);
+        }
         
         private void ReFlushCookiesView(bool isFormRawData)
         {
-            if(isFormRawData)
+            if (isFormRawData)  //修改rtb_cookies，更新CookiesList及ListView
             {
-                 var tempCookiesList = GetCookieList(rtb_cookies.Text);
-                 if (tempCookiesList != null)
+                var tempCookiesList = GetCookieList(rtb_cookies.Text, addAtr);
+                if (tempCookiesList != null)
                 {
                     myCookiesList = tempCookiesList;
                     rtb_cookies.ForeColor = Color.Black;
@@ -401,7 +427,14 @@ namespace FreeCookies
                     lv_cookie.Items.Clear();
                     foreach (var kvCookiein in myCookiesList)
                     {
-                        lv_cookie.Items.Add(new ListViewItem(new string[] { kvCookiein.Key, kvCookiein.Value ,""}));
+                        if (string.IsNullOrEmpty(addAtr))
+                        {
+                            lv_cookie.Items.Add(new ListViewItem(new string[] { kvCookiein.Key, kvCookiein.Value, "" }));
+                        }
+                        else
+                        {
+                            lv_cookie.Items.Add(new ListViewItem(new string[] { kvCookiein.Key, kvCookiein.Value.Remove(kvCookiein.Value.Length - addAtr.Length - 2), addAtr }));
+                        }
                     }
                     lv_cookie.ResumeLayout();
                 }
@@ -418,7 +451,7 @@ namespace FreeCookies
                 
                 editCookieControl.ReflushEditItem();
             }
-            else
+            else //修改ListView，更新CookiesList及rtb_cookies
             {
                 myCookiesList.Clear();
                 if(lv_cookie.Items.Count>0)
@@ -488,9 +521,6 @@ namespace FreeCookies
         }
 
         #endregion
-
-
-
 
 
     }
