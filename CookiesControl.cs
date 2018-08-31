@@ -296,6 +296,11 @@ namespace FreeCookies
             ReflushAddResponseHeads();
         }
 
+        private void pb_editCookietSet_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://www.lulianqi.com/help/FreeCookiesHelp.htm");
+        }
+
         private void lv_editResponseHeads_DoubleClick(object sender, EventArgs e)
         {
             if (lv_editResponseHeads.SelectedItems.Count > 0)

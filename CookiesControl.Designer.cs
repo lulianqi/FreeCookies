@@ -51,9 +51,9 @@
             this.pb_removeHead = new System.Windows.Forms.PictureBox();
             this.lv_editResponseHeads = new System.Windows.Forms.ListView();
             this.columnHeader_heads = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cb_onlyHead = new System.Windows.Forms.CheckBox();
             this.splitContainer_info = new System.Windows.Forms.SplitContainer();
             this.pb_editCookietSet = new System.Windows.Forms.PictureBox();
-            this.cb_onlyHead = new System.Windows.Forms.CheckBox();
             this.editCookieControl = new FreeCookies.EditCookieControl();
             this.groupBox_urlFilter.SuspendLayout();
             this.groupBox_editResponse.SuspendLayout();
@@ -303,6 +303,17 @@
             this.columnHeader_heads.Text = "Heads";
             this.columnHeader_heads.Width = 241;
             // 
+            // cb_onlyHead
+            // 
+            this.cb_onlyHead.AutoSize = true;
+            this.cb_onlyHead.Location = new System.Drawing.Point(112, 19);
+            this.cb_onlyHead.Name = "cb_onlyHead";
+            this.cb_onlyHead.Size = new System.Drawing.Size(102, 16);
+            this.cb_onlyHead.TabIndex = 48;
+            this.cb_onlyHead.Text = "Only Add Head";
+            this.cb_onlyHead.UseVisualStyleBackColor = true;
+            this.cb_onlyHead.CheckedChanged += new System.EventHandler(this.cb_onlyHead_CheckedChanged);
+            // 
             // splitContainer_info
             // 
             this.splitContainer_info.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -337,19 +348,9 @@
             this.pb_editCookietSet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_editCookietSet.TabIndex = 37;
             this.pb_editCookietSet.TabStop = false;
+            this.pb_editCookietSet.Click += new System.EventHandler(this.pb_editCookietSet_Click);
             this.pb_editCookietSet.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
             this.pb_editCookietSet.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
-            // 
-            // cb_onlyHead
-            // 
-            this.cb_onlyHead.AutoSize = true;
-            this.cb_onlyHead.Location = new System.Drawing.Point(112, 19);
-            this.cb_onlyHead.Name = "cb_onlyHead";
-            this.cb_onlyHead.Size = new System.Drawing.Size(102, 16);
-            this.cb_onlyHead.TabIndex = 48;
-            this.cb_onlyHead.Text = "Only Add Head";
-            this.cb_onlyHead.UseVisualStyleBackColor = true;
-            this.cb_onlyHead.CheckedChanged += new System.EventHandler(this.cb_onlyHead_CheckedChanged);
             // 
             // editCookieControl
             // 
