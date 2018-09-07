@@ -40,7 +40,7 @@ namespace FreeCookies
             myCookiesList=new List<KeyValuePair<string,string>>();
             editedItemList = new List<KeyValuePair<ListViewItem, int>>();
 
-            cookiesInjectInfo.IsInject = ck_isInjeckCookies.Checked;
+            cookiesInjectInfo.IsInject = ck_isInjectCookies.Checked;
             cookiesInjectInfo.ContainUrl = cookiesInjectInfo.IsExactMatch ? tb_urlFilter.Text.Remove(0, 1) : tb_urlFilter.Text;
             cookiesInjectInfo.IsExactMatch = tb_urlFilter.Text.StartsWith("*");
             responseChangeInfo.IsChange = ck_isChangeResponse.Checked;
@@ -153,7 +153,7 @@ namespace FreeCookies
             PutInfo(yourHeads);
             if(!cb_injectAlways.Checked)
             {
-                ck_isInjeckCookies.Checked = false;
+                ck_isInjectCookies.Checked = false;
                 PutWarn("Set InjeckCookies unable");
             }
         }
@@ -252,9 +252,9 @@ namespace FreeCookies
 
         private void ck_isInjeckCookies_CheckedChanged(object sender, EventArgs e)
         {
-            cookiesInjectInfo.IsInject = ck_isInjeckCookies.Checked;
-            groupBox_urlFilter.Enabled = !ck_isInjeckCookies.Checked;
-            if(cb_injectAlways.Checked && !ck_isInjeckCookies.Checked)
+            cookiesInjectInfo.IsInject = ck_isInjectCookies.Checked;
+            groupBox_urlFilter.Enabled = !ck_isInjectCookies.Checked;
+            if(cb_injectAlways.Checked && !ck_isInjectCookies.Checked)
             {
                 cb_injectAlways.Checked = false;
             }
@@ -262,9 +262,9 @@ namespace FreeCookies
 
         private void cb_injectAlways_CheckedChanged(object sender, EventArgs e)
         {
-            if(cb_injectAlways.Checked && !ck_isInjeckCookies.Checked)
+            if(cb_injectAlways.Checked && !ck_isInjectCookies.Checked)
             {
-                ck_isInjeckCookies.Checked = true;
+                ck_isInjectCookies.Checked = true;
             }
         }
 

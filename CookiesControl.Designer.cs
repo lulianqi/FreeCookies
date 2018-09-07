@@ -39,7 +39,7 @@
             this.groupBox_urlFilter = new System.Windows.Forms.GroupBox();
             this.lb_info_1 = new System.Windows.Forms.Label();
             this.tb_urlFilter = new System.Windows.Forms.TextBox();
-            this.ck_isInjeckCookies = new System.Windows.Forms.CheckBox();
+            this.ck_isInjectCookies = new System.Windows.Forms.CheckBox();
             this.cb_injectAlways = new System.Windows.Forms.CheckBox();
             this.groupBox_editResponse = new System.Windows.Forms.GroupBox();
             this.ck_isChangeResponse = new System.Windows.Forms.CheckBox();
@@ -158,16 +158,16 @@
             this.tb_urlFilter.TabIndex = 0;
             this.tb_urlFilter.TextChanged += new System.EventHandler(this.tb_urlFilter_TextChanged);
             // 
-            // ck_isInjeckCookies
+            // ck_isInjectCookies
             // 
-            this.ck_isInjeckCookies.AutoSize = true;
-            this.ck_isInjeckCookies.Location = new System.Drawing.Point(5, 54);
-            this.ck_isInjeckCookies.Name = "ck_isInjeckCookies";
-            this.ck_isInjeckCookies.Size = new System.Drawing.Size(108, 16);
-            this.ck_isInjeckCookies.TabIndex = 6;
-            this.ck_isInjeckCookies.Text = "Injeck Cookies";
-            this.ck_isInjeckCookies.UseVisualStyleBackColor = true;
-            this.ck_isInjeckCookies.CheckedChanged += new System.EventHandler(this.ck_isInjeckCookies_CheckedChanged);
+            this.ck_isInjectCookies.AutoSize = true;
+            this.ck_isInjectCookies.Location = new System.Drawing.Point(5, 54);
+            this.ck_isInjectCookies.Name = "ck_isInjectCookies";
+            this.ck_isInjectCookies.Size = new System.Drawing.Size(108, 16);
+            this.ck_isInjectCookies.TabIndex = 6;
+            this.ck_isInjectCookies.Text = "Inject Cookies";
+            this.ck_isInjectCookies.UseVisualStyleBackColor = true;
+            this.ck_isInjectCookies.CheckedChanged += new System.EventHandler(this.ck_isInjeckCookies_CheckedChanged);
             // 
             // cb_injectAlways
             // 
@@ -176,7 +176,7 @@
             this.cb_injectAlways.Name = "cb_injectAlways";
             this.cb_injectAlways.Size = new System.Drawing.Size(102, 16);
             this.cb_injectAlways.TabIndex = 7;
-            this.cb_injectAlways.Text = "Injeck Always";
+            this.cb_injectAlways.Text = "Inject Always";
             this.cb_injectAlways.UseVisualStyleBackColor = true;
             this.cb_injectAlways.CheckedChanged += new System.EventHandler(this.cb_injectAlways_CheckedChanged);
             // 
@@ -324,7 +324,7 @@
             // 
             this.splitContainer_info.Panel1.Controls.Add(this.groupBox_urlFilter);
             this.splitContainer_info.Panel1.Controls.Add(this.groupBox_editResponse);
-            this.splitContainer_info.Panel1.Controls.Add(this.ck_isInjeckCookies);
+            this.splitContainer_info.Panel1.Controls.Add(this.ck_isInjectCookies);
             this.splitContainer_info.Panel1.Controls.Add(this.pb_editCookietSet);
             this.splitContainer_info.Panel1.Controls.Add(this.cb_injectAlways);
             // 
@@ -400,7 +400,7 @@
         private System.Windows.Forms.GroupBox groupBox_urlFilter;
         private System.Windows.Forms.Label lb_info_1;
         private System.Windows.Forms.TextBox tb_urlFilter;
-        private System.Windows.Forms.CheckBox ck_isInjeckCookies;
+        private System.Windows.Forms.CheckBox ck_isInjectCookies;
         private System.Windows.Forms.CheckBox cb_injectAlways;
         private System.Windows.Forms.PictureBox pb_editCookietSet;
         private System.Windows.Forms.ColumnHeader columnHeader3;

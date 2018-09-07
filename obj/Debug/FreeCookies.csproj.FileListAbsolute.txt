@@ -30,3 +30,4 @@ D:\my\code\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.pdb
 D:\my\code\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.csprojResolveAssemblyReference.cache
 C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.EditCookieForm.resources
 C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.AddResponseHead.resources
+C:\Users\administer\Documents\Visual Studio 2013\Projects\FiddlerExtension\FreeCookies\obj\Debug\FreeCookies.csprojResolveAssemblyReference.cache
