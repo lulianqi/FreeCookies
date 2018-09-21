@@ -20,6 +20,7 @@ namespace FreeCookies
 
         CookiesInjectInfo cookiesInjectInfo = null;                        //cookies修改信息
         ResponseChangeInfo responseChangeInfo = null;                      //response修改信息
+        RawResponseInfo rawResponseInfo = null;
         List<KeyValuePair<string, string>> myCookiesList = null;           //cookie列表数据源
         string addAtr = "Path=/";                                          //cookie默认属性
         Timer myTimer = new Timer();
@@ -29,6 +30,8 @@ namespace FreeCookies
         List<KeyValuePair<ListViewItem,int>> editedItemList=null;          //处于标记状态的cookie列表
         Graphics graphicsForRtbCookies=null;
         Pen warnPen = null;
+        RawResponseEdit rawResponseEdit;
+
 
         public delegate void cookiesControlButtonEventHandler(object sender);
         public event cookiesControlButtonEventHandler OnGetCookies;
@@ -37,8 +40,16 @@ namespace FreeCookies
         {
             cookiesInjectInfo = new CookiesInjectInfo();
             responseChangeInfo = new ResponseChangeInfo();
+            rawResponseInfo = new RawResponseInfo();
             myCookiesList=new List<KeyValuePair<string,string>>();
             editedItemList = new List<KeyValuePair<ListViewItem, int>>();
+            rawResponseEdit = new RawResponseEdit();
+            rawResponseEdit.OnRawResponseEditClose += rawResponseEdit_OnRawResponseEditClose;
+            rawResponseEdit.OnRawResponseEnableChange += rawResponseEdit_OnRawResponseEnableChange;
+            groupBox_editResponse.Controls.Add(rawResponseEdit);
+            rawResponseEdit.BringToFront();
+            rawResponseEdit.Dock = DockStyle.Fill;
+            rawResponseEdit.Visible = false;
 
             cookiesInjectInfo.IsInject = ck_isInjectCookies.Checked;
             cookiesInjectInfo.ContainUrl = cookiesInjectInfo.IsExactMatch ? tb_urlFilter.Text.Remove(0, 1) : tb_urlFilter.Text;
@@ -62,6 +73,7 @@ namespace FreeCookies
 
         }
 
+
         /// <summary>
         /// 获取Response修改信息
         /// </summary>
@@ -81,6 +93,11 @@ namespace FreeCookies
         public string InjectCookies
         {
             get { return rtb_cookies.Text; }
+        }
+
+        public RawResponseInfo RawResponseEditInfo
+        {
+            get { return rawResponseInfo; }
         }
 
         public List<KeyValuePair<string, string>> CookiesList
@@ -238,6 +255,17 @@ namespace FreeCookies
             }
         }
 
+        void rawResponseEdit_OnRawResponseEditClose(object sender, EventArgs e)
+        {
+            rtb_reponse.Visible = lv_editResponseHeads.Visible = true;
+            rawResponseInfo.IsRawModel = false;
+        }
+
+        void rawResponseEdit_OnRawResponseEnableChange(object sender, EventArgs e)
+        {
+            rawResponseInfo.IsEnable = ((RawResponseEdit)sender).IsEnable;
+            rawResponseInfo.httpResponse = ((RawResponseEdit)sender).RawResponse;
+        }
 
         private void rtb_cookies_KeyUp(object sender, KeyEventArgs e)
         {
@@ -311,13 +339,13 @@ namespace FreeCookies
         }
 
         //pictureBox change for all
-        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        public void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             ((PictureBox)sender).BackColor = Color.Honeydew;
         }
 
         //pictureBox change for all
-        private void pictureBox_MouseLeave(object sender, EventArgs e)
+        public void pictureBox_MouseLeave(object sender, EventArgs e)
         {
             ((PictureBox)sender).BackColor = Color.Transparent;
         }
@@ -357,6 +385,14 @@ namespace FreeCookies
         {
             responseChangeInfo.ResponseStr = rtb_reponse.Text;
         }
+
+        private void pb_editRawResponse_Click(object sender, EventArgs e)
+        {
+            rtb_reponse.Visible = lv_editResponseHeads.Visible = false;
+            rawResponseEdit.Visible = true;
+            rawResponseInfo.IsRawModel = true; ;
+        }
+
         #endregion
 
         #region UI Resize
@@ -530,7 +566,7 @@ namespace FreeCookies
 
     }
 
-
+    
 
     public class CookiesInjectInfo
     {
@@ -550,6 +586,19 @@ namespace FreeCookies
         public string ResponseStr { get; set; }
 
         public List<KeyValuePair<string, string>> ResponseAddHead { get; set; }
+    }
+
+    public class RawResponseInfo
+    {
+        public bool IsRawModel { get; set; }
+        public bool IsEnable { get; set; }
+
+        public HttpResponse httpResponse { get; set; }
+
+        public RawResponseInfo()
+        {
+            httpResponse = new HttpResponse();
+        }
     }
 
     public class ChangeCookieItemEventArgs : EventArgs

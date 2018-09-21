@@ -68,7 +68,8 @@ namespace FreeCookies
         }
         public void AutoTamperRequestAfter(Session oSession)
         {
-            
+            oSession.responseCode = 100;
+            //oSession.oResponse = new ServerChatter();
         }
 
         public void AutoTamperRequestBefore(Session oSession)
@@ -108,7 +109,29 @@ namespace FreeCookies
                 }
             }
 
-            if(myCookiesCtrl.ChangeInfo.IsChange)
+            if (myCookiesCtrl.RawResponseEditInfo.IsRawModel)
+            {
+                if(myCookiesCtrl.RawResponseEditInfo.IsEnable)
+                {
+                    if (oSession.RequestMethod == "CONNECT")
+                    {
+                        return;
+                    }
+
+                    if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
+                    {
+                        oSession.responseCode = myCookiesCtrl.RawResponseEditInfo.httpResponse.ResponseCode;
+                        oSession.ResponseHeaders.RemoveAll();
+                        foreach (var tempKv in myCookiesCtrl.RawResponseEditInfo.httpResponse.ResponseHeads)
+                        {
+                            oSession.ResponseHeaders.Add(tempKv.Key, tempKv.Value);
+                        }
+                        oSession.ResponseBody = myCookiesCtrl.RawResponseEditInfo.httpResponse.ResponseEntity;
+                    }
+                }
+            }
+
+            else if(myCookiesCtrl.ChangeInfo.IsChange)
             {
                 if (oSession.RequestMethod == "CONNECT")
                 {
@@ -147,6 +170,7 @@ namespace FreeCookies
                     oSession["ui-backcolor"] = "Firebrick";
                 }
             }
+
         }
 
         public void AutoTamperResponseBefore(Session oSession)

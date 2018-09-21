@@ -42,6 +42,7 @@
             this.ck_isInjectCookies = new System.Windows.Forms.CheckBox();
             this.cb_injectAlways = new System.Windows.Forms.CheckBox();
             this.groupBox_editResponse = new System.Windows.Forms.GroupBox();
+            this.pb_editRawResponse = new System.Windows.Forms.PictureBox();
             this.ck_isChangeResponse = new System.Windows.Forms.CheckBox();
             this.ck_isRegex = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,6 +58,7 @@
             this.editCookieControl = new FreeCookies.EditCookieControl();
             this.groupBox_urlFilter.SuspendLayout();
             this.groupBox_editResponse.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_editRawResponse)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_addHead)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_removeHead)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_info)).BeginInit();
@@ -182,6 +184,7 @@
             // 
             // groupBox_editResponse
             // 
+            this.groupBox_editResponse.Controls.Add(this.pb_editRawResponse);
             this.groupBox_editResponse.Controls.Add(this.ck_isChangeResponse);
             this.groupBox_editResponse.Controls.Add(this.ck_isRegex);
             this.groupBox_editResponse.Controls.Add(this.label1);
@@ -199,6 +202,22 @@
             this.groupBox_editResponse.TabStop = false;
             this.groupBox_editResponse.Text = "Change Response";
             this.groupBox_editResponse.Resize += new System.EventHandler(this.groupBox_editResponse_Resize);
+            // 
+            // pb_editRawResponse
+            // 
+            this.pb_editRawResponse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pb_editRawResponse.BackColor = System.Drawing.Color.Transparent;
+            this.pb_editRawResponse.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pb_editRawResponse.Image = ((System.Drawing.Image)(resources.GetObject("pb_editRawResponse.Image")));
+            this.pb_editRawResponse.Location = new System.Drawing.Point(195, 16);
+            this.pb_editRawResponse.Name = "pb_editRawResponse";
+            this.pb_editRawResponse.Size = new System.Drawing.Size(23, 22);
+            this.pb_editRawResponse.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pb_editRawResponse.TabIndex = 49;
+            this.pb_editRawResponse.TabStop = false;
+            this.pb_editRawResponse.Click += new System.EventHandler(this.pb_editRawResponse_Click);
+            this.pb_editRawResponse.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
+            this.pb_editRawResponse.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
             // 
             // ck_isChangeResponse
             // 
@@ -326,8 +345,7 @@
             this.splitContainer_info.Panel1.Controls.Add(this.groupBox_editResponse);
             this.splitContainer_info.Panel1.Controls.Add(this.ck_isInjectCookies);
             this.splitContainer_info.Panel1.Controls.Add(this.pb_editCookietSet);
-            this.splitContainer_info.Panel1.Controls.Add(this.cb_injectAlways);
-            // 
+            this.splitContainer_info.Panel1.Controls.Add(this.cb_injectAlways);            // 
             // splitContainer_info.Panel2
             // 
             this.splitContainer_info.Panel2.Controls.Add(this.rtb_info);
@@ -376,6 +394,7 @@
             this.groupBox_urlFilter.PerformLayout();
             this.groupBox_editResponse.ResumeLayout(false);
             this.groupBox_editResponse.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_editRawResponse)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_addHead)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_removeHead)).EndInit();
             this.splitContainer_info.Panel1.ResumeLayout(false);
@@ -416,5 +435,6 @@
         private System.Windows.Forms.TextBox tb_responseReplace;
         private System.Windows.Forms.CheckBox ck_isChangeResponse;
         private System.Windows.Forms.CheckBox cb_onlyHead;
+        private System.Windows.Forms.PictureBox pb_editRawResponse;
     }
 }

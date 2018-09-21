@@ -75,11 +75,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="RawResponseEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RawResponseEdit.Designer.cs">
+      <DependentUpon>RawResponseEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Resources\MyResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MyResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="ResponseHelper.cs" />
     <Compile Include="WatermakTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -100,6 +107,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RawResponseEdit.resx">
+      <DependentUpon>RawResponseEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\MyResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
