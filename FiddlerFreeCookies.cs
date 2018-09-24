@@ -73,7 +73,23 @@ namespace FreeCookies
 
         public void AutoTamperRequestBefore(Session oSession)
         {
-            oSession.bBufferResponse = true;
+            //oSession.bBufferResponse = true;
+            //oSession.LoadResponseFromFile(@"C:\Users\administer\AppData\Local\Programs\Fiddler\ResponseTemplates\200_SimpleHTML.dat");
+            if (myCookiesCtrl.RawResponseEditInfo.IsRawModel)
+            {
+                if (myCookiesCtrl.RawResponseEditInfo.IsEnable)
+                {
+                    if (oSession.RequestMethod == "CONNECT")
+                    {
+                        return;
+                    }
+
+                    if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
+                    {
+                        
+                    }
+                }
+            }
         }
 
         public void AutoTamperResponseAfter(Session oSession)
