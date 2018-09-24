@@ -68,13 +68,12 @@ namespace FreeCookies
         }
         public void AutoTamperRequestAfter(Session oSession)
         {
-            oSession.responseCode = 100;
-            //oSession.oResponse = new ServerChatter();
+            
         }
 
         public void AutoTamperRequestBefore(Session oSession)
         {
-            
+            oSession.bBufferResponse = true;
         }
 
         public void AutoTamperResponseAfter(Session oSession)
@@ -91,6 +90,7 @@ namespace FreeCookies
             {
                 return;
             }
+
             if (myCookiesCtrl.InjectInfo.IsInject)
             {
                 if (oSession.RequestMethod == "CONNECT")
