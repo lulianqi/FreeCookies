@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,19 +76,21 @@ namespace FreeCookies
         {
             //oSession.bBufferResponse = true;
             //oSession.LoadResponseFromFile(@"C:\Users\administer\AppData\Local\Programs\Fiddler\ResponseTemplates\200_SimpleHTML.dat");
-            if (myCookiesCtrl.RawResponseEditInfo.IsRawModel)
+            if (!isOnLoad)
             {
-                if (myCookiesCtrl.RawResponseEditInfo.IsEnable)
+                return;
+            }
+            if (myCookiesCtrl.RawResponseEditInfo.IsRawModel && myCookiesCtrl.RawResponseEditInfo.IsEnable)
+            {
+                if (oSession.RequestMethod == "CONNECT")
                 {
-                    if (oSession.RequestMethod == "CONNECT")
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
-                    {
-                        
-                    }
+                if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
+                {
+                    MemoryStream ms = new MemoryStream(myCookiesCtrl.RawResponseEditInfo.httpResponse.GetRawHttpResponse());
+                    bool x= oSession.LoadResponseFromStream(ms, null);
                 }
             }
         }
@@ -125,25 +128,23 @@ namespace FreeCookies
                 }
             }
 
-            if (myCookiesCtrl.RawResponseEditInfo.IsRawModel)
+            if (myCookiesCtrl.RawResponseEditInfo.IsRawModel&& myCookiesCtrl.RawResponseEditInfo.IsEnable)
             {
-                if(myCookiesCtrl.RawResponseEditInfo.IsEnable)
+                return;
+                if (oSession.RequestMethod == "CONNECT")
                 {
-                    if (oSession.RequestMethod == "CONNECT")
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
+                if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
+                {
+                    oSession.responseCode = myCookiesCtrl.RawResponseEditInfo.httpResponse.ResponseCode;
+                    oSession.ResponseHeaders.RemoveAll();
+                    foreach (var tempKv in myCookiesCtrl.RawResponseEditInfo.httpResponse.ResponseHeads)
                     {
-                        oSession.responseCode = myCookiesCtrl.RawResponseEditInfo.httpResponse.ResponseCode;
-                        oSession.ResponseHeaders.RemoveAll();
-                        foreach (var tempKv in myCookiesCtrl.RawResponseEditInfo.httpResponse.ResponseHeads)
-                        {
-                            oSession.ResponseHeaders.Add(tempKv.Key, tempKv.Value);
-                        }
-                        oSession.ResponseBody = myCookiesCtrl.RawResponseEditInfo.httpResponse.ResponseEntity;
+                        oSession.ResponseHeaders.Add(tempKv.Key, tempKv.Value);
                     }
+                    oSession.ResponseBody = myCookiesCtrl.RawResponseEditInfo.httpResponse.ResponseEntity;
                 }
             }
 

@@ -18,6 +18,25 @@ namespace FreeCookies
         {
             ResponseHeads = new List<KeyValuePair<string, string>>();
         }
+
+        public byte[] GetRawHttpResponse()
+        {
+            StringBuilder tempResponseSb = new StringBuilder();
+            tempResponseSb.AppendLine(ResponseLine);
+            foreach (var tempHead in ResponseHeads)
+            {
+                tempResponseSb.AppendLine(string.Format("{0}: {1}", tempHead.Key, tempHead.Value));
+            }
+            tempResponseSb.Append("\r\n");
+            if (ResponseEntity != null)
+            {
+                return Encoding.UTF8.GetBytes(tempResponseSb.ToString()).Concat(ResponseEntity).ToArray();
+            }
+            else
+            {
+                return Encoding.UTF8.GetBytes(tempResponseSb.ToString());
+            }
+        }
     }
     public class ResponseHelper
     {
