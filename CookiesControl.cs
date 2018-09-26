@@ -259,12 +259,22 @@ namespace FreeCookies
         {
             rtb_reponse.Visible = lv_editResponseHeads.Visible = true;
             rawResponseInfo.IsRawModel = false;
+            PutWarn("Raw Response modle close");
         }
 
         void rawResponseEdit_OnRawResponseEnableChange(object sender, EventArgs e)
         {
             rawResponseInfo.IsEnable = ((RawResponseEdit)sender).IsEnable;
+            rawResponseInfo.IsDirectResponse = ((RawResponseEdit)sender).IsDirectRespons;
             rawResponseInfo.httpResponse = ((RawResponseEdit)sender).RawResponse;
+            if(rawResponseInfo.IsEnable)
+            {
+                PutInfo("Raw Response Change is enabled");
+            }
+            else
+            {
+                PutInfo("Raw Response Change is unabled");
+            }
         }
 
         private void rtb_cookies_KeyUp(object sender, KeyEventArgs e)
@@ -592,6 +602,8 @@ namespace FreeCookies
     {
         public bool IsRawModel { get; set; }
         public bool IsEnable { get; set; }
+
+        public bool IsDirectResponse { get; set; }
 
         public HttpResponse httpResponse { get; set; }
 

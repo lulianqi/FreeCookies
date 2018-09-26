@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CookiesControl));
             this.rtb_cookies = new System.Windows.Forms.RichTextBox();
             this.bt_getCookies = new System.Windows.Forms.Button();
@@ -55,6 +56,7 @@
             this.cb_onlyHead = new System.Windows.Forms.CheckBox();
             this.splitContainer_info = new System.Windows.Forms.SplitContainer();
             this.pb_editCookietSet = new System.Windows.Forms.PictureBox();
+            this.toolTip_CookiesControl = new System.Windows.Forms.ToolTip(this.components);
             this.editCookieControl = new FreeCookies.EditCookieControl();
             this.groupBox_urlFilter.SuspendLayout();
             this.groupBox_editResponse.SuspendLayout();
@@ -158,6 +160,8 @@
             this.tb_urlFilter.Name = "tb_urlFilter";
             this.tb_urlFilter.Size = new System.Drawing.Size(304, 21);
             this.tb_urlFilter.TabIndex = 0;
+            this.toolTip_CookiesControl.SetToolTip(this.tb_urlFilter, "contain will match\r\nstart with * mean complete match\r\nempty mean any url is match" +
+        "");
             this.tb_urlFilter.TextChanged += new System.EventHandler(this.tb_urlFilter_TextChanged);
             // 
             // ck_isInjectCookies
@@ -215,6 +219,7 @@
             this.pb_editRawResponse.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_editRawResponse.TabIndex = 49;
             this.pb_editRawResponse.TabStop = false;
+            this.toolTip_CookiesControl.SetToolTip(this.pb_editRawResponse, "raw modle");
             this.pb_editRawResponse.Click += new System.EventHandler(this.pb_editRawResponse_Click);
             this.pb_editRawResponse.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
             this.pb_editRawResponse.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
@@ -227,6 +232,7 @@
             this.ck_isChangeResponse.Size = new System.Drawing.Size(102, 16);
             this.ck_isChangeResponse.TabIndex = 47;
             this.ck_isChangeResponse.Text = "Enable Change";
+            this.toolTip_CookiesControl.SetToolTip(this.ck_isChangeResponse, "change the response if match url filter");
             this.ck_isChangeResponse.UseVisualStyleBackColor = true;
             this.ck_isChangeResponse.CheckedChanged += new System.EventHandler(this.ck_isChangeResponse_CheckedChanged);
             // 
@@ -239,6 +245,7 @@
             this.ck_isRegex.Size = new System.Drawing.Size(54, 16);
             this.ck_isRegex.TabIndex = 46;
             this.ck_isRegex.Text = "Regex";
+            this.toolTip_CookiesControl.SetToolTip(this.ck_isRegex, "use the regex to change the response body");
             this.ck_isRegex.UseVisualStyleBackColor = true;
             this.ck_isRegex.CheckedChanged += new System.EventHandler(this.ck_isRegex_CheckedChanged);
             // 
@@ -281,6 +288,7 @@
             this.pb_addHead.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_addHead.TabIndex = 42;
             this.pb_addHead.TabStop = false;
+            this.toolTip_CookiesControl.SetToolTip(this.pb_addHead, "add head");
             this.pb_addHead.Click += new System.EventHandler(this.pb_addHead_Click);
             this.pb_addHead.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
             this.pb_addHead.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
@@ -297,6 +305,7 @@
             this.pb_removeHead.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_removeHead.TabIndex = 41;
             this.pb_removeHead.TabStop = false;
+            this.toolTip_CookiesControl.SetToolTip(this.pb_removeHead, "remove head");
             this.pb_removeHead.Click += new System.EventHandler(this.pb_removeHead_Click);
             this.pb_removeHead.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
             this.pb_removeHead.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
@@ -330,6 +339,7 @@
             this.cb_onlyHead.Size = new System.Drawing.Size(102, 16);
             this.cb_onlyHead.TabIndex = 48;
             this.cb_onlyHead.Text = "Only Add Head";
+            this.toolTip_CookiesControl.SetToolTip(this.cb_onlyHead, "not change the respose body only change the head");
             this.cb_onlyHead.UseVisualStyleBackColor = true;
             this.cb_onlyHead.CheckedChanged += new System.EventHandler(this.cb_onlyHead_CheckedChanged);
             // 
@@ -345,7 +355,8 @@
             this.splitContainer_info.Panel1.Controls.Add(this.groupBox_editResponse);
             this.splitContainer_info.Panel1.Controls.Add(this.ck_isInjectCookies);
             this.splitContainer_info.Panel1.Controls.Add(this.pb_editCookietSet);
-            this.splitContainer_info.Panel1.Controls.Add(this.cb_injectAlways);            // 
+            this.splitContainer_info.Panel1.Controls.Add(this.cb_injectAlways);
+            // 
             // splitContainer_info.Panel2
             // 
             this.splitContainer_info.Panel2.Controls.Add(this.rtb_info);
@@ -366,6 +377,7 @@
             this.pb_editCookietSet.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_editCookietSet.TabIndex = 37;
             this.pb_editCookietSet.TabStop = false;
+            this.toolTip_CookiesControl.SetToolTip(this.pb_editCookietSet, "online help");
             this.pb_editCookietSet.Click += new System.EventHandler(this.pb_editCookietSet_Click);
             this.pb_editCookietSet.MouseLeave += new System.EventHandler(this.pictureBox_MouseLeave);
             this.pb_editCookietSet.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
@@ -436,5 +448,6 @@
         private System.Windows.Forms.CheckBox ck_isChangeResponse;
         private System.Windows.Forms.CheckBox cb_onlyHead;
         private System.Windows.Forms.PictureBox pb_editRawResponse;
+        private System.Windows.Forms.ToolTip toolTip_CookiesControl;
     }
 }

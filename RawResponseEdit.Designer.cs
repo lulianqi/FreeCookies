@@ -32,13 +32,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RawResponseEdit));
             this.cb_responseLine = new System.Windows.Forms.ComboBox();
             this.rtb_rawResponse = new System.Windows.Forms.RichTextBox();
-            this.pb_editResponseCancel = new System.Windows.Forms.PictureBox();
-            this.ck_enabled = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip_forRtbResponse = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pb_editResponseCancel = new System.Windows.Forms.PictureBox();
+            this.ck_enabled = new System.Windows.Forms.CheckBox();
             this.openFileDialog_responseFile = new System.Windows.Forms.OpenFileDialog();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_editResponseCancel)).BeginInit();
+            this.ck_directResponse = new System.Windows.Forms.CheckBox();
             this.contextMenuStrip_forRtbResponse.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_editResponseCancel)).BeginInit();
             this.SuspendLayout();
             // 
             // cb_responseLine
@@ -58,9 +59,23 @@
             this.rtb_rawResponse.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.rtb_rawResponse.Location = new System.Drawing.Point(0, 25);
             this.rtb_rawResponse.Name = "rtb_rawResponse";
-            this.rtb_rawResponse.Size = new System.Drawing.Size(432, 176);
+            this.rtb_rawResponse.Size = new System.Drawing.Size(550, 176);
             this.rtb_rawResponse.TabIndex = 1;
             this.rtb_rawResponse.Text = "";
+            // 
+            // contextMenuStrip_forRtbResponse
+            // 
+            this.contextMenuStrip_forRtbResponse.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addFileToolStripMenuItem});
+            this.contextMenuStrip_forRtbResponse.Name = "contextMenuStrip_forRtbResponse";
+            this.contextMenuStrip_forRtbResponse.Size = new System.Drawing.Size(121, 26);
+            // 
+            // addFileToolStripMenuItem
+            // 
+            this.addFileToolStripMenuItem.Name = "addFileToolStripMenuItem";
+            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.addFileToolStripMenuItem.Text = "add file";
+            this.addFileToolStripMenuItem.Click += new System.EventHandler(this.addFileToolStripMenuItem_Click);
             // 
             // pb_editResponseCancel
             // 
@@ -68,7 +83,7 @@
             this.pb_editResponseCancel.BackColor = System.Drawing.Color.Transparent;
             this.pb_editResponseCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pb_editResponseCancel.Image = ((System.Drawing.Image)(resources.GetObject("pb_editResponseCancel.Image")));
-            this.pb_editResponseCancel.Location = new System.Drawing.Point(407, 0);
+            this.pb_editResponseCancel.Location = new System.Drawing.Point(525, 0);
             this.pb_editResponseCancel.Name = "pb_editResponseCancel";
             this.pb_editResponseCancel.Size = new System.Drawing.Size(23, 22);
             this.pb_editResponseCancel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -87,38 +102,35 @@
             this.ck_enabled.UseVisualStyleBackColor = true;
             this.ck_enabled.CheckedChanged += new System.EventHandler(this.ck_enabled_CheckedChanged);
             // 
-            // contextMenuStrip_forRtbResponse
-            // 
-            this.contextMenuStrip_forRtbResponse.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addFileToolStripMenuItem});
-            this.contextMenuStrip_forRtbResponse.Name = "contextMenuStrip_forRtbResponse";
-            this.contextMenuStrip_forRtbResponse.Size = new System.Drawing.Size(153, 48);
-            // 
-            // addFileToolStripMenuItem
-            // 
-            this.addFileToolStripMenuItem.Name = "addFileToolStripMenuItem";
-            this.addFileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.addFileToolStripMenuItem.Text = "add file";
-            this.addFileToolStripMenuItem.Click += new System.EventHandler(this.addFileToolStripMenuItem_Click);
-            // 
             // openFileDialog_responseFile
             // 
             this.openFileDialog_responseFile.FileName = "openFileDialog";
+            // 
+            // ck_directResponse
+            // 
+            this.ck_directResponse.AutoSize = true;
+            this.ck_directResponse.Location = new System.Drawing.Point(404, 4);
+            this.ck_directResponse.Name = "ck_directResponse";
+            this.ck_directResponse.Size = new System.Drawing.Size(114, 16);
+            this.ck_directResponse.TabIndex = 39;
+            this.ck_directResponse.Text = "Response Direct";
+            this.ck_directResponse.UseVisualStyleBackColor = true;
             // 
             // RawResponseEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.ck_directResponse);
             this.Controls.Add(this.ck_enabled);
             this.Controls.Add(this.pb_editResponseCancel);
             this.Controls.Add(this.rtb_rawResponse);
             this.Controls.Add(this.cb_responseLine);
             this.Name = "RawResponseEdit";
-            this.Size = new System.Drawing.Size(432, 201);
+            this.Size = new System.Drawing.Size(550, 201);
             this.Load += new System.EventHandler(this.RawResponseEdit_Load);
             this.Resize += new System.EventHandler(this.RawResponseEdit_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.pb_editResponseCancel)).EndInit();
             this.contextMenuStrip_forRtbResponse.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_editResponseCancel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,5 +145,6 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_forRtbResponse;
         private System.Windows.Forms.ToolStripMenuItem addFileToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog_responseFile;
+        private System.Windows.Forms.CheckBox ck_directResponse;
     }
 }

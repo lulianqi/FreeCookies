@@ -28,6 +28,11 @@ namespace FreeCookies
             get { return ck_enabled.Checked; }
         }
 
+        public bool IsDirectRespons
+        {
+            get { return ck_directResponse.Checked; }
+        }
+
         public HttpResponse RawResponse
         {
             get { return httpResponse; }
@@ -85,7 +90,7 @@ namespace FreeCookies
                 try
                 {
                     httpResponse=ResponseHelper.GetHttpResponse(rtb_rawResponse.Text.Replace("\n","\r\n"));
-                    cb_responseLine.Enabled = rtb_rawResponse.Enabled = false;            
+                    cb_responseLine.Enabled = rtb_rawResponse.Enabled= ck_directResponse.Enabled = false;            
                 }
                 catch(Exception ex)
                 {
@@ -95,7 +100,7 @@ namespace FreeCookies
             }
             else
             {
-                cb_responseLine.Enabled = rtb_rawResponse.Enabled = true;
+                cb_responseLine.Enabled = rtb_rawResponse.Enabled = ck_directResponse.Enabled = true;
             }
 
             if (OnRawResponseEnableChange != null)

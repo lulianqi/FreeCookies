@@ -80,31 +80,30 @@ namespace FreeCookies
             {
                 return;
             }
-            if (myCookiesCtrl.RawResponseEditInfo.IsRawModel && myCookiesCtrl.RawResponseEditInfo.IsEnable)
+            if (myCookiesCtrl.RawResponseEditInfo.IsRawModel && myCookiesCtrl.RawResponseEditInfo.IsEnable && myCookiesCtrl.RawResponseEditInfo.IsDirectResponse)
             {
                 if (oSession.RequestMethod == "CONNECT")
                 {
+                    //MemoryStream msSslDecryptEndpointCreated;
+                    //msSslDecryptEndpointCreated = new MemoryStream(Encoding.UTF8.GetBytes(string.Format("HTTP/1.1 200 DecryptEndpoint Created\r\nTimestamp: {0}\r\nFiddlerGateway: AutoResponder\r\nConnection: close\r\n\r\nThis is a Fiddler-generated response to the client's request for a CONNECT tunnel.\r\n",System.DateTime.Now.ToString("HH:mm:ss.fff"))));
+                    //oSession.LoadResponseFromStream(msSslDecryptEndpointCreated, null);
                     return;
                 }
 
                 if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
                 {
                     MemoryStream ms = new MemoryStream(myCookiesCtrl.RawResponseEditInfo.httpResponse.GetRawHttpResponse());
-                    bool x= oSession.LoadResponseFromStream(ms, null);
+                    oSession.LoadResponseFromStream(ms, null);
+                    myCookiesCtrl.FiddlerFreeCookiesSetResponsed(oSession.url);
+                    oSession["ui-backcolor"] = "Powderblue";
+                    oSession["ui-bold"] = "true";
+                    oSession["ui-color"] = "Red";
                 }
             }
         }
 
         public void AutoTamperResponseAfter(Session oSession)
         {
-            //if (oSession.uriContains("cnzz.com"))
-            //{
-            //    System.Threading.Thread.Sleep(10000000);
-            //}
-
-            //oSession.utilFindInResponse("", false);
-            //oSession.utilReplaceRegexInResponse
-            //oSession.oResponse.headers.Add();
             if (!isOnLoad)
             {
                 return;
@@ -118,7 +117,6 @@ namespace FreeCookies
                 }
                 if ((!myCookiesCtrl.InjectInfo.IsExactMatch && oSession.uriContains(myCookiesCtrl.InjectInfo.ContainUrl)) || (myCookiesCtrl.InjectInfo.IsExactMatch && oSession.fullUrl == myCookiesCtrl.InjectInfo.ContainUrl))
                 {
-                    //oSession.oResponse.headers.Add("Set-Cookie", myCookiesCtrl.InjectCookies);
                     foreach (var tempCookie in myCookiesCtrl.CookiesList)
                     {
                         oSession.oResponse.headers.Add("Set-Cookie", string.Format("{0}={1}", tempCookie.Key, tempCookie.Value));
@@ -130,7 +128,11 @@ namespace FreeCookies
 
             if (myCookiesCtrl.RawResponseEditInfo.IsRawModel&& myCookiesCtrl.RawResponseEditInfo.IsEnable)
             {
-                return;
+                if(myCookiesCtrl.RawResponseEditInfo.IsDirectResponse)
+                {
+                    return;
+                }
+                
                 if (oSession.RequestMethod == "CONNECT")
                 {
                     return;
@@ -145,6 +147,9 @@ namespace FreeCookies
                         oSession.ResponseHeaders.Add(tempKv.Key, tempKv.Value);
                     }
                     oSession.ResponseBody = myCookiesCtrl.RawResponseEditInfo.httpResponse.ResponseEntity;
+
+                    myCookiesCtrl.FiddlerFreeCookiesSetResponsed(oSession.url);
+                    oSession["ui-backcolor"] = "Powderblue";
                 }
             }
 
@@ -183,8 +188,8 @@ namespace FreeCookies
                             }
                         }
                     }
-                    myCookiesCtrl.FiddlerFreeCookiesSetResponsed(oSession.url); 
-                    oSession["ui-backcolor"] = "Firebrick";
+                    myCookiesCtrl.FiddlerFreeCookiesSetResponsed(oSession.url);
+                    oSession["ui-backcolor"] = "Powderblue";
                 }
             }
 
