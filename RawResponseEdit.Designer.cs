@@ -38,6 +38,7 @@
             this.ck_enabled = new System.Windows.Forms.CheckBox();
             this.openFileDialog_responseFile = new System.Windows.Forms.OpenFileDialog();
             this.ck_directResponse = new System.Windows.Forms.CheckBox();
+            this.toolTip_RawResponseEdit = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStrip_forRtbResponse.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_editResponseCancel)).BeginInit();
             this.SuspendLayout();
@@ -89,6 +90,7 @@
             this.pb_editResponseCancel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pb_editResponseCancel.TabIndex = 37;
             this.pb_editResponseCancel.TabStop = false;
+            this.toolTip_RawResponseEdit.SetToolTip(this.pb_editResponseCancel, "close raw modle");
             this.pb_editResponseCancel.Click += new System.EventHandler(this.pb_editResponseCancel_Click);
             // 
             // ck_enabled
@@ -99,6 +101,7 @@
             this.ck_enabled.Size = new System.Drawing.Size(66, 16);
             this.ck_enabled.TabIndex = 38;
             this.ck_enabled.Text = "Enabled";
+            this.toolTip_RawResponseEdit.SetToolTip(this.ck_enabled, "enable raw modle \r\ncheck it mean change the response");
             this.ck_enabled.UseVisualStyleBackColor = true;
             this.ck_enabled.CheckedChanged += new System.EventHandler(this.ck_enabled_CheckedChanged);
             // 
@@ -114,6 +117,7 @@
             this.ck_directResponse.Size = new System.Drawing.Size(114, 16);
             this.ck_directResponse.TabIndex = 39;
             this.ck_directResponse.Text = "Response Direct";
+            this.toolTip_RawResponseEdit.SetToolTip(this.ck_directResponse, "not send the request to the real sever \r\nit will direct return your response");
             this.ck_directResponse.UseVisualStyleBackColor = true;
             // 
             // RawResponseEdit
@@ -146,5 +150,6 @@
         private System.Windows.Forms.ToolStripMenuItem addFileToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog_responseFile;
         private System.Windows.Forms.CheckBox ck_directResponse;
+        private System.Windows.Forms.ToolTip toolTip_RawResponseEdit;
     }
 }
